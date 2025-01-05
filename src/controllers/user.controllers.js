@@ -168,6 +168,8 @@ const refreshPage = asyncHandler(async(req,res) => {
       .json(new ApiResponse(200, user, "User exist"))
       
   } catch (error) {
+    console.log(error);
+    
     if (error.name === "JsonWebTokenError") {
         res.status(401).json({ message: "Invalid token" });
     } else if (error.name === "TokenExpiredError") {
