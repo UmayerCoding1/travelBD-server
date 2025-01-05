@@ -4,8 +4,11 @@ console.log('s',process.env.MONGODB_URL);
 
 const connectDB = async () => {
     try {
-        // const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`)
-        const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL_LOCAL}/${DB_NAME}`)
+        const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`)
+        // const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL_LOCAL}/${DB_NAME}`,{
+        //     useNewUrlParser: true,
+        //     useUnifiedTopology: true,
+        // })
         console.log(`${process.env.MONGODB_URL_LOCAL}`);
         // console.log(`${process.env.MONGODB_URL}`);
         
