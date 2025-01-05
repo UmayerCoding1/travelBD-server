@@ -101,7 +101,8 @@ const loginUser = asyncHandler(async(req,res) => {
         httpOnly: true,
         // todo: secure value is hidden for .env file
         secure: process.env.OPTION_SECURE === "production",
-        // sameSite: "None",
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 15 minutes
     }
 
     return res
