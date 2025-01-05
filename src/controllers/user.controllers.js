@@ -147,7 +147,7 @@ const logoutUser = asyncHandler(async(req,res) => {
 });
 
 const refreshPage = asyncHandler(async(req,res) => {
-    console.log(req.cookies);
+    console.log("token",req.cookies);
     
   try {
       const {accessToken} = req.cookies;
