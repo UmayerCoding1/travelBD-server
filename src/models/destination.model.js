@@ -15,9 +15,35 @@ const destinationSchema = new Schema({
         type: String,
         require: true,
     },
-    Offer:{
-        day:{}
-    }
+    offer:{
+        day: {
+            type: Number
+        },
+        hours: {
+            type: String
+        },
+        people: {
+            type: Number
+        }
+    },
+    requirement: {
+        type: Array
+    },
+    price: {type: Number},
+    pick_up:{type: String},
+    timing: {type: String},
+    image: {
+        type: Array,
+        required: true
+    },
+    inclusion_exclusion: {
+        inclusion : {type: Array},
+        exclusion :  {type: Array}
+    },
+    description : {type: String},
+    option:{type:Array},
+    rating: {type: String},
+    view_count: {type: Number}
 },{timestamps: true})
 
 export const Destination = mongoose.model('DESTINATION', destinationSchema);

@@ -41,6 +41,30 @@ const userSchema = new Schema({
     roll:{
         type: String,
         default: 'user'
+    },
+    gender: {
+        type: String,
+         default: ""
+    },
+    marital_status: {
+        type: String,
+         default: ""
+    },
+    date_of_Birth: {
+        type: String,
+         default: ""
+    },
+    nationalID: {
+        type: String,
+         default: ""
+    },
+    religion: {
+        type: String,
+         default: ""
+    },
+    emergency_contact: {
+        type: String,
+         default: ""
     }
 },{timestamps: true});
 
