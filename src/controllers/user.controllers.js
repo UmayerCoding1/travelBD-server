@@ -90,6 +90,7 @@ const loginUser = asyncHandler(async(req,res) => {
     }
 
     const {accessToken,refreshToken} =await generateAccessAndRefreshToken(user._id);
+    console.log(accessToken,refreshToken);
     
     if (!accessToken && !refreshToken) {
         throw new ApiError(500, "Something went wrong  not find refresh ans access token")
@@ -148,41 +149,6 @@ const logoutUser = asyncHandler(async(req,res) => {
 
 const refreshPage = asyncHandler(async(req,res) => {
     console.log("token",req.cookies);
-    
-  try {
-      const {accessToken} = req.cookies;
-      console.log();
-      
-      
-      if(!accessToken){
-          throw new ApiError(401, "no token exist")
-      }
-  
-      // verify Token 
-      const playLoad = jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
-      const user = await User.findById(playLoad._id).select("-password -refreshToken");
-  
-      if(!user){
-          throw new ApiError(404, "User not found")
-      }
-  
-      return res
-      .status(200)
-      .json(new ApiResponse(200, user, "User exist"))
-      
-  } catch (error) {
-    console.log(error);
-    
-    if (error.name === "JsonWebTokenError") {
-        res.status(401).json({ message: "Invalid token" });
-    } else if (error.name === "TokenExpiredError") {
-        res.status(401).json({ message: "Token has expired" });
-    } else {
-        res.status(error.statusCode || 500).json({
-            message: error.message || "Internal Server Error",
-        });
-    }
-  }
     
 });
 
