@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.put('/update-avatar', verifyToken, upload.single('avatar'),updateAvatar);
-router.get('/user',verifyToken, loggedUser);
+router.get('/user', loggedUser);
 router.patch('/update-User-info', verifyToken, updateUserInfo)
 
 
