@@ -8,7 +8,7 @@ console.log(port);
 connectDB()
 .then(() => {
     app.on('error', (error) => {
-        console.log('Error', error);
+        // console.log('Error', error);
         throw(error)
     })
 app.get('/', (req,res) => {
@@ -22,5 +22,5 @@ app.listen(port, () => {
 
 })
 .catch(err => {
-    console.log(`MongoDB connect failed!!!!`, err);
+    // console.log(`MongoDB connect failed!!!!`, err);
 })

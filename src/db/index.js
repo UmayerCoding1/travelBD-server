@@ -9,11 +9,11 @@ const connectDB = async () => {
         //     useNewUrlParser: true,
         //     useUnifiedTopology: true,
         // })
-        console.log(`${process.env.MONGODB_URL_LOCAL}`);
+        // console.log(`${process.env.MONGODB_URL_LOCAL}`);
         // console.log(`${process.env.MONGODB_URL}`);
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         process.exit(1);
         
     }

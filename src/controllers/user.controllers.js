@@ -17,7 +17,7 @@ const generateAccessAndRefreshToken = async (userId) => {
      await user.save({validateBeforeSave: false});
      return {accessToken,refreshToken}
    } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw new ApiError(500,"Something went wrong while generating refresh and access token")
    }
     
@@ -55,7 +55,7 @@ const registerUser = asyncHandler(async(req,res) => {
     const createdUser = await User.findById(user._id).select(
         "-password  -refreshToken"
       );
-    console.log(createdUser);
+    // console.log(createdUser);
     
 
     if(!createdUser) throw new ApiError(500, "Something went wrong while registering the user");
@@ -104,7 +104,7 @@ const loginUser = asyncHandler(async(req,res) => {
         sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
         maxAge: 15 * 60 * 1000, // 15 minutes
     }
-console.log(option);
+// console.log(option);
 
     return res
     .status(200)
@@ -148,7 +148,7 @@ const logoutUser = asyncHandler(async(req,res) => {
 });
 
 const refreshPage = asyncHandler(async(req,res) => {
-    console.log("token",req.cookies);
+    // console.log("token",req.cookies);
     const {accessToken,refreshToken} = req.cookies;
   res
   .status(200)
@@ -222,7 +222,7 @@ const updateAvatar = asyncHandler(async(req,res) => {
     },{new: true, runValidators: true}
   ).select('-password -refreshToken')
   
-console.log(user);
+// console.log(user);
 
   res
   .status(200)
