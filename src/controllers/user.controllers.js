@@ -93,8 +93,9 @@ const loginUser = asyncHandler(async (req, res) => {
     const option ={
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Secure only in production
-      sameSite:  "None",
-      domain: process.env.NODE_ENV === "production" ? "travelbd-t5kb.onrender.com" : "localhost",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+      ...(process.env.NODE_ENV === "production" && { domain: "travelbd-t5kb.onrender.com" }),
+      maxAge: 24 * 60 * 60 * 1000,
     }
 console.log(option);
     
