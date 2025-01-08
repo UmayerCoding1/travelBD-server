@@ -91,14 +91,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const loggedUser = await User.findById(user._id).select("-password -refreshToken");
 
     const option ={
-        httpOnly: true,
-        // todo: secure value is hidden for .env file
-        secure: process.env.OPTION_SECURE === "production",
-        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-        maxAge: 15 * 60 * 1000, // 15 minutes
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Secure only in production
+      sameSite:  "None",
+      domain: process.env.NODE_ENV === "production" ? "travelbd-t5kb.onrender.com" : "localhost",
     }
-// console.log(option);
-
+console.log(option);
+    
     return res
     .status(200)
     .cookie("accessToken", accessToken, option)
