@@ -127,6 +127,8 @@ const loginUser = asyncHandler(async(req,res) => {
 
 
 const logoutUser = asyncHandler(async(req,res) => {
+  console.log(req.body);
+  
    await User.findByIdAndUpdate(req.user._id,{
     $unset: {
         refreshToken:1
@@ -140,6 +142,8 @@ const logoutUser = asyncHandler(async(req,res) => {
    }
 
    
+   
+   
    return res
    .status(200)
    .clearCookie('accessToken', option)
@@ -149,16 +153,21 @@ const logoutUser = asyncHandler(async(req,res) => {
 
 const refreshPage = asyncHandler(async(req,res) => {
     try {
-               const {accessToken} = req.cookies;
-              console.log();
-              
-              
+        
+              //  const {accessToken} = req.cookies;
+              const accessToken = req.headers.authorization?.split(' ')[1];
+
               if(!accessToken){
                   throw new ApiError(401, "no token exist")
               }
           
               // verify Token 
               const playLoad = jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
+              if (!playLoad) {
+                console.log('Error');
+                
+              }
+              
               const user = await User.findById(playLoad._id).select("-password -refreshToken");
           
               if(!user){
@@ -188,6 +197,12 @@ const refreshPage = asyncHandler(async(req,res) => {
 // get user data form logged user 
 const loggedUser = asyncHandler(async (req,res) => {
     const email = req.query.email;
+    console.log(req.user);
+    
+    if(email !== req.user.email){
+      throw new ApiError('UnAuthorization user')
+    }
+    
   
    const user = await User.find({email});
    

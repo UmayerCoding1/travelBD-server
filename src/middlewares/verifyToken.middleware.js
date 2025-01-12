@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import jwt from 'jsonwebtoken';
 
@@ -9,8 +10,13 @@ const verifyToken = asyncHandler(async(req,res,next) => {
         // console.log(token);
         
         
+        
         if (!token) {
-            throw new ApiError(401, "Unauthorized access");
+            res
+            .status(401)
+            .json(
+                new ApiResponse(401,{},"UnAuthorization access")
+            )
         }
 
         const decodeToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
