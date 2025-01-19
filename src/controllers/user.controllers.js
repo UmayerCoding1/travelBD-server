@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import { uploadCloudinary } from "../utils/cloudinary.js";
+import bcrypt  from 'bcrypt';
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -268,6 +269,35 @@ const updateAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Your avatar is successfully update"));
 });
 
+const changePassword = asyncHandler(async(req,res) => {
+ const user = await User.findOne({email:req.body.email});
+  if (!user) {
+    throw new ApiError(404, 'user not exist');
+  }
+ 
+    const oldPassword =await user.isPasswordCorrect(req.body.oldPassword);
+    if (!oldPassword) {
+      throw new ApiError(400, 'password is nor current');
+    }
+
+    const hashedNewPassword = await bcrypt.hash(req.body.newPassword,10);
+    
+    
+
+    const changUserPassword = await User.findByIdAndUpdate(
+      user._id,
+      {
+        $set: {
+          password: hashedNewPassword
+        }
+      },{new: true, runValidators: true}
+    ).select('-password -refreshToken');
+
+    
+    
+    return res.status(202).json(new ApiResponse(202, {changUserPassword}, 'Password update successfully'))
+})
+
 export {
   registerUser,
   loginUser,
@@ -276,4 +306,5 @@ export {
   loggedUser,
   updateUserInfo,
   updateAvatar,
+  changePassword
 };
