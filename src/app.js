@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
     origin:[
         "http://localhost:5173",
-        "https://fascinating-marzipan-6ba2a2.netlify.app"
+        "https://transcendent-cajeta-819efd.netlify.app"
     ],
     credentials: true
 }));

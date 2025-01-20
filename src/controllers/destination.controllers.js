@@ -23,10 +23,13 @@ const allDestinations = asyncHandler(async (req, res) => {
 const singleDestination = asyncHandler(async (req, res) => {
   try {
     const destination = await Destination.findById(req.params.id);
-
+    const { inclusion_exclusion,__v, ...destinationData } = destination.toObject();
+    
+    
+   
     return res.status(200).json({
       status: 200,
-      data: destination,
+      data: destinationData,
       massage: `${req.params.id} data`,
     });
   } catch (error) {
