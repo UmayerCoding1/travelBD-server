@@ -11,13 +11,13 @@ This  is a MERN stack project to [travelBD.com](https://travelbd-158bd.web.app) 
 
 # Technologies Used
  #### Express.js
- ## Dotenv 
- ## mongodb
- ## Mongoose 
- ## Node.js
- ## jwt
- ## Bctypt
- ## multer
- ## Cloudinary 
- ## cors
- ## nodemon
+ #### Dotenv 
+ #### mongodb
+ #### Mongoose 
+ #### Node.js
+ #### jwt
+ #### Bctypt
+ #### multer
+ #### Cloudinary 
+ #### cors
+ #### nodemon
